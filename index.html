@@ -32,9 +32,17 @@
       justify-content: center;
       position: absolute;
       top: 0; left: 0;
+      overflow-y: auto;
     }
 
     .slide.active { display: flex; }
+
+    @media (max-width: 768px) {
+      .slide {
+        padding: 40px 28px 80px;
+        justify-content: flex-start;
+      }
+    }
 
     .slide-label {
       font-size: 12px;
@@ -131,6 +139,13 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px 60px;
       margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .toc-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
     }
 
     .toc-part-label {
@@ -519,7 +534,7 @@
   <div class="slide">
     <div class="slide-label">목차</div>
     <h2>발표 순서</h2>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 60px; margin-top:8px;">
+    <div class="toc-grid">
       <div>
         <div style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#6366f1; margin-bottom:14px;">Part 1. AI 에이전트, 써도 될까?</div>
         <div class="toc-item"><span class="num">1</span> 핵심 개념 정리</div>
