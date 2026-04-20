@@ -37,10 +37,18 @@
 
     .slide.active { display: flex; }
 
+    .slide-top {
+      justify-content: flex-start;
+      padding-top: 50px;
+    }
+
     @media (max-width: 768px) {
       .slide {
         padding: 72px 28px 80px;
         justify-content: flex-start;
+      }
+      .slide-top {
+        padding-top: 72px;
       }
     }
 
@@ -578,7 +586,7 @@
   </div>
 
   <!-- Slide 4: AI 서비스 비교 -->
-  <div class="slide" style="justify-content:flex-start; padding-top:50px;">
+  <div class="slide slide-top">
     <div class="slide-label">Part 1 — 2</div>
     <h2>AI 서비스 비교</h2>
     <table>
