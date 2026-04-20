@@ -813,7 +813,26 @@
   </div>
 </div>
 
-<script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+  import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBmfITkhduWRAd3OvX0yiGRzGF-0u1Shes",
+    authDomain: "hankookilbo-ai-agent-seminar.firebaseapp.com",
+    databaseURL: "https://hankookilbo-ai-agent-seminar-default-rtdb.firebaseio.com",
+    projectId: "hankookilbo-ai-agent-seminar",
+    storageBucket: "hankookilbo-ai-agent-seminar.firebasestorage.app",
+    messagingSenderId: "651815901324",
+    appId: "1:651815901324:web:ab5febd48faf07da9b03a9",
+    measurementId: "G-N1LGWGD5MF"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const qaRef = ref(db, 'questions');
+
+  // ── 슬라이드 ──
   const slides = document.querySelectorAll('.slide');
   const total = slides.length;
   let current = 0;
@@ -842,72 +861,68 @@
   let questions = [];
   let selectedType = '질문';
 
-  function openQA()  { document.getElementById('qaOverlay').classList.add('open'); }
-  function closeQA() { document.getElementById('qaOverlay').classList.remove('open'); }
+  window.openQA  = () => document.getElementById('qaOverlay').classList.add('open');
+  window.closeQA = () => document.getElementById('qaOverlay').classList.remove('open');
 
-  function handleOverlayClick(e) {
-    if (e.target === document.getElementById('qaOverlay')) closeQA();
-  }
+  window.handleOverlayClick = e => {
+    if (e.target === document.getElementById('qaOverlay')) window.closeQA();
+  };
 
-  function switchTab(tab) {
+  window.switchTab = tab => {
     document.getElementById('tabQ').classList.toggle('active', tab === 'question');
     document.getElementById('tabR').classList.toggle('active', tab === 'result');
     document.getElementById('panelQuestion').classList.toggle('active', tab === 'question');
     document.getElementById('panelResult').classList.toggle('active', tab === 'result');
-    if (tab === 'result') renderResults();
-  }
+  };
 
-  function selectType(btn, type) {
+  window.selectType = (btn, type) => {
     document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
     selectedType = type;
-  }
+  };
 
-  function updateSubmitBtn() {
+  window.updateSubmitBtn = () => {
     const val = document.getElementById('qaInput').value.trim();
     document.getElementById('qaSubmit').disabled = val.length === 0;
-  }
+  };
 
-  function submitQA() {
+  window.submitQA = () => {
     const text = document.getElementById('qaInput').value.trim();
     if (!text) return;
-    questions.push({ type: selectedType, text, slide: current + 1 });
+    push(qaRef, { type: selectedType, text, slide: current + 1 });
     document.getElementById('qaInput').value = '';
     document.getElementById('qaSubmit').disabled = true;
-
-    const badge = document.getElementById('qaBadge');
-    badge.textContent = questions.length;
-    badge.classList.add('show');
-    updateResultLabel();
-
-    switchTab('result');
-    renderResults();
-  }
-
-  function updateResultLabel() {
-    const n = questions.length;
-    document.getElementById('resultCountLabel').textContent = n > 0 ? `(${n})` : '';
-  }
+    window.switchTab('result');
+  };
 
   const typeClass = { '질문': 't-question', '의견': 't-opinion', '기타': 't-other' };
 
-  function renderResults() {
+  // 실시간 동기화
+  onValue(qaRef, snapshot => {
+    questions = [];
+    snapshot.forEach(child => questions.push(child.val()));
+
+    const n = questions.length;
+    const badge = document.getElementById('qaBadge');
+    badge.textContent = n;
+    badge.classList.toggle('show', n > 0);
+    document.getElementById('resultCountLabel').textContent = n > 0 ? `(${n})` : '';
+
     const list = document.getElementById('resultList');
     const countEl = document.getElementById('resultCount');
-    if (questions.length === 0) {
+    if (n === 0) {
       list.innerHTML = '<div class="qa-empty">아직 제출된 내용이 없습니다.</div>';
       countEl.textContent = '';
       return;
     }
-    countEl.textContent = `총 ${questions.length}건`;
+    countEl.textContent = `총 ${n}건`;
     list.innerHTML = questions.map(q => `
       <div class="qa-result-item">
         <div class="item-type ${typeClass[q.type]}">${q.type} · 슬라이드 ${q.slide}</div>
-        <div class="item-text">${q.text.replace(/</g,'&lt;')}</div>
+        <div class="item-text">${q.text.replace(/</g, '&lt;')}</div>
       </div>
     `).join('');
-    updateResultLabel();
-  }
+  });
 </script>
 <script>
   new QRCode(document.getElementById("qrcode"), {
