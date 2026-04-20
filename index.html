@@ -847,7 +847,7 @@
     document.getElementById('progressBar').style.width = `${((current + 1) / total) * 100}%`;
   }
 
-  function changeSlide(dir) { showSlide(current + dir); }
+  window.changeSlide = dir => showSlide(current + dir);
 
   document.addEventListener('keydown', e => {
     if (e.target.tagName === 'TEXTAREA') return;
