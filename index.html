@@ -700,6 +700,7 @@
           <th>목적</th>
           <th>자율 실행</th>
           <th>특징</th>
+          <th>리스크 관리</th>
         </tr>
       </thead>
       <tbody>
@@ -708,36 +709,42 @@
           <td>답변 확보</td>
           <td><span class="badge badge-safe">✕</span></td>
           <td>—</td>
+          <td>—</td>
         </tr>
         <tr>
           <td><strong>Github Copilot</strong></td>
           <td>IDE 챗봇</td>
           <td><span class="badge badge-safe">✕</span></td>
           <td>챗봇 기반 개발 보조</td>
+          <td>Business/Enterprise: Zero Retention<br><span style="color:#6b7280;">CLI 28일 보관, Coding Agent는 계정 유지 기간 동안 세션 로그 보관</span></td>
         </tr>
         <tr>
           <td><strong>Claude Cowork</strong></td>
           <td>업무 자동화</td>
           <td><span class="badge badge-warn">제한적</span></td>
           <td>인간 감독 전제<br>Anthropic 공식</td>
+          <td>학습 사용 비동의 설정 가능<br><span style="color:#6b7280;">대화 내역 로컬 저장, 별도 보관 정책 없음</span></td>
         </tr>
         <tr>
           <td><strong>Claude Code</strong></td>
           <td>터미널 코딩 에이전트</td>
           <td><span class="badge badge-warn">제한적</span></td>
           <td>인간 감독 전제<br>Anthropic 공식</td>
+          <td>Enterprise: Zero Data Retention<br><span style="color:#6b7280;">Free/Pro/Max: 학습 동의 여부에 따라 30일 or 5년 보관</span></td>
         </tr>
         <tr>
           <td><strong>Cursor</strong></td>
           <td>코딩 도우미</td>
           <td><span class="badge badge-warn">제한적</span></td>
           <td>멀티 AI 모델<br>GUI 승인 방식</td>
+          <td>Privacy Mode — Zero Data Retention<br><span style="color:#6b7280;">Free/Pro도 지원, 개인이 직접 설정 필요</span></td>
         </tr>
         <tr>
           <td><strong>Open Claw</strong></td>
           <td>AI 가상 비서</td>
           <td><span class="badge badge-danger">○ 완전 자율</span></td>
           <td>오픈소스<br>안전장치 없음</td>
+          <td>기본값 off, 선택 설정 가능<br><span style="color:#6b7280;">샌드박싱(실행 환경 격리), require_approval(위험 명령 전 승인)</span></td>
         </tr>
       </tbody>
     </table>
@@ -767,7 +774,6 @@
         <h3>왜 확산됐나?</h3>
         <ul>
           <li>GitHub 공개 오픈소스 → 무료. 누구나 수정·배포 가능</li>
-          <li>2024년 말 국내 개발자 커뮤니티에서 빠르게 확산 → 기업 내 도입 사례 증가</li>
           <li>"AI가 직접 일을 한다"는 패러다임 변화가 오는 시점</li>
         </ul>
       </div>
@@ -784,8 +790,8 @@
     <blockquote>네이버·카카오·당근이 OpenClaw를 금지한 이유</blockquote>
     <ul style="margin-bottom:24px;">
       <li>오픈소스, <strong>비공식 제품</strong></li>
-      <li>AI API의 판단을 <strong>그대로 실행하는 "집행관"</strong> 역할</li>
       <li><strong>안전장치 없음</strong> → 위험한 명령도 그대로 실행</li>
+      <li>AI API는 <strong>"변호사가 법률 자문을 해주는 것"</strong><br>OpenClaw는 <strong>"그 자문을 그대로 실행하는 집행관"</strong></li>
     </ul>
     <h3>상용 프로그램과의 차이</h3>
     <ul>
