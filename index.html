@@ -47,7 +47,6 @@
 
       .slide {
         padding: 52px 16px 64px;
-        justify-content: flex-start;
       }
       .slide-top {
         padding-top: 52px;
@@ -593,6 +592,37 @@
       color: #6b7280;
       margin-bottom: 14px;
     }
+
+    /* 2컬럼 슬라이드 레이아웃 */
+    .slide-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    .slide-cols-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-cols-img img {
+      width: 100%;
+      height: auto;
+      max-width: 640px;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .slide-cols {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .slide-cols-img img {
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -620,11 +650,12 @@
         <div style="font-size:15px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#6366f1; margin-bottom:14px;">Part 1. AI 에이전트, 써도 될까?</div>
         <div class="toc-item"><span class="num">1</span> 핵심 개념 정리</div>
         <div class="toc-item"><span class="num">2</span> AI 서비스 비교</div>
-        <div class="toc-item"><span class="num">3</span> OpenClaw, 왜 문제인가?</div>
-        <div class="toc-item"><span class="num">4</span> Claude Code 취약점</div>
-        <div class="toc-item"><span class="num">5</span> 안전하게 쓰는 방법</div>
-        <div class="toc-item"><span class="num">6</span> 결론</div>
-        <div class="toc-item"><span class="num">7</span> AI 대상 공격 유형</div>
+        <div class="toc-item"><span class="num">3</span> OpenClaw는 뭘까?</div>
+        <div class="toc-item"><span class="num">4</span> OpenClaw, 왜 문제인가?</div>
+        <div class="toc-item"><span class="num">5</span> Claude Code 취약점</div>
+        <div class="toc-item"><span class="num">6</span> 안전하게 쓰는 방법</div>
+        <div class="toc-item"><span class="num">7</span> 결론</div>
+        <div class="toc-item"><span class="num">8</span> AI 대상 공격 유형</div>
       </div>
       <div>
         <div style="font-size:15px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#6366f1; margin-bottom:14px;">Part 2. AI, 저는 이렇게 씁니다</div>
@@ -659,56 +690,96 @@
   </div>
 
   <!-- Slide 4: AI 서비스 비교 -->
-  <div class="slide slide-top">
+  <div class="slide">
     <div class="slide-label">Part 1 — 2</div>
     <h2>AI 서비스 비교</h2>
     <table>
       <thead>
         <tr>
-          <th>항목</th>
-          <th>일반 챗봇</th>
-          <th>Github Copilot</th>
-          <th>Claude Cowork</th>
-          <th>Claude Code</th>
-          <th>Cursor</th>
-          <th>Open Claw</th>
+          <th>서비스</th>
+          <th>목적</th>
+          <th>자율 실행</th>
+          <th>특징</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>목적</strong></td>
+          <td><strong>일반 챗봇</strong></td>
           <td>답변 확보</td>
-          <td>IDE 챗봇</td>
-          <td>업무 자동화</td>
-          <td>터미널 코딩 에이전트</td>
-          <td>코딩 도우미</td>
-          <td>코딩 도우미</td>
-        </tr>
-        <tr>
-          <td><strong>자율 실행</strong></td>
           <td><span class="badge badge-safe">✕</span></td>
-          <td><span class="badge badge-safe">✕</span></td>
-          <td><span class="badge badge-warn">제한적</span></td>
-          <td><span class="badge badge-warn">제한적</span></td>
-          <td><span class="badge badge-warn">제한적</span></td>
-          <td><span class="badge badge-danger">○ 완전 자율</span></td>
-        </tr>
-        <tr>
-          <td><strong>특징</strong></td>
           <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Github Copilot</strong></td>
+          <td>IDE 챗봇</td>
+          <td><span class="badge badge-safe">✕</span></td>
           <td>챗봇 기반 개발 보조</td>
+        </tr>
+        <tr>
+          <td><strong>Claude Cowork</strong></td>
+          <td>업무 자동화</td>
+          <td><span class="badge badge-warn">제한적</span></td>
           <td>인간 감독 전제<br>Anthropic 공식</td>
+        </tr>
+        <tr>
+          <td><strong>Claude Code</strong></td>
+          <td>터미널 코딩 에이전트</td>
+          <td><span class="badge badge-warn">제한적</span></td>
           <td>인간 감독 전제<br>Anthropic 공식</td>
+        </tr>
+        <tr>
+          <td><strong>Cursor</strong></td>
+          <td>코딩 도우미</td>
+          <td><span class="badge badge-warn">제한적</span></td>
           <td>멀티 AI 모델<br>GUI 승인 방식</td>
+        </tr>
+        <tr>
+          <td><strong>Open Claw</strong></td>
+          <td>AI 가상 비서</td>
+          <td><span class="badge badge-danger">○ 완전 자율</span></td>
           <td>오픈소스<br>안전장치 없음</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Slide 5: OpenClaw -->
+  <!-- Slide 5: OpenClaw는 뭘까? -->
   <div class="slide">
     <div class="slide-label">Part 1 — 3</div>
+    <h2>OpenClaw는 뭘까?</h2>
+    <div class="slide-cols">
+      <div>
+        <h3>이름의 변화</h3>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
+          <span class="tag">Clawdbot</span>
+          <span style="color:#6366f1; font-weight:700;">→</span>
+          <span class="tag">Moltbot</span>
+          <span style="color:#6366f1; font-weight:700;">→</span>
+          <span class="tag">OpenClaw</span>
+        </div>
+        <h3>무엇을 하는 도구인가?</h3>
+        <ul style="margin-bottom:16px;">
+          <li>소프트웨어 엔지니어 <strong>피터 슈타인베르거</strong> 가 Clawbot으로 이름을 공개했다.</li>
+          <li>AI 모델 X. AI를 활용하는 껍데기 → AI 비서를 만들기 위한 방법론에 가까움</li>
+          <li>Claude·GPT 등 AI API에 연결 → 텔레그램, 디스코드, 왓츠앱을 통해 명령을 내리면 <strong>자동 실행</strong></li>
+          <li>e.g. 이메일 전송, 레스토랑 예약, 전화, 할일 관리</li>
+        </ul>
+        <h3>왜 확산됐나?</h3>
+        <ul>
+          <li>GitHub 공개 오픈소스 → 무료. 누구나 수정·배포 가능</li>
+          <li>2024년 말 국내 개발자 커뮤니티에서 빠르게 확산 → 기업 내 도입 사례 증가</li>
+          <li>"AI가 직접 일을 한다"는 패러다임 변화가 오는 시점</li>
+        </ul>
+      </div>
+      <div class="slide-cols-img">
+        <img src="openclaw-star.webp" alt="OpenClaw"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: OpenClaw, 왜 문제인가? -->
+  <div class="slide">
+    <div class="slide-label">Part 1 — 4</div>
     <h2>OpenClaw, 왜 문제인가?</h2>
     <blockquote>네이버·카카오·당근이 OpenClaw를 금지한 이유</blockquote>
     <ul style="margin-bottom:24px;">
@@ -722,11 +793,17 @@
       <li>사용자 승인 필요</li>
       <li>실행 범위·횟수 제한</li>
     </ul>
+    <h3>맥미니 품절 대란?</h3>
+    <ul>
+      <li>실행 환경 격리</li>
+      <li>상시 대기</li>
+      <li>적합한 스펙. GPU, CPU, 메모리</li>
+    </ul>
   </div>
 
-  <!-- Slide 6: 취약점 -->
+  <!-- Slide 7: 취약점 -->
   <div class="slide">
-    <div class="slide-label">Part 1 — 4</div>
+    <div class="slide-label">Part 1 — 5</div>
     <h2>Claude Code 취약점, 정말 위험한가?</h2>
     <ul style="margin-bottom:24px;">
       <li>발견된 취약점 3개: 오픈소스 사용 또는 내부 직원 악의적 공격 시나리오</li>
@@ -734,48 +811,17 @@
       <li>Check Point Research와 협력 → <strong>패치 완료</strong></li>
     </ul>
     <blockquote>
-      "AI 도구가 특별히 위험한 게 아니라,<br>
-      자동화 범위가 넓어진 만큼 설정 파일 하나의 영향력이 커졌다"
+      지금까지도 오타를 노린 악성 패키지, 악의적 코드를 숨긴 오픈소스는 존재했습니다.<br><br>
+      "AI 도구가 특별히 새로운 종류의 위험을 만들낸다기보다<br>
+      자동화 범위가 넓어진만큼 설정 파일 하나나 잘못된 명령으로 인한 영향력이 커졌다고 볼 수 있습니다"<br><br>
+      이건 AI 도구의 문제라기 보다 검증하지 않고 무조건적으로 의존하며 사용하는 방식의 문제로 볼 수 있습니다.
     </blockquote>
-    <ul style="margin-top:16px;">
-      <li>VS Code 플러그인, npm 악성 패키지와 <strong>동일한 종류의 위협</strong></li>
-    </ul>
   </div>
 
-  <!-- Slide 7: 안전하게 쓰는 방법 -->
-  <div class="slide">
-    <div class="slide-label">Part 1 — 5</div>
-    <h2>안전하게 쓰는 방법</h2>
-    <ol style="gap:14px;">
-      <li><strong>오픈소스 사용 제한</strong> — 신뢰도 높은 오픈소스만, 사전 검증 후 사용</li>
-      <li><strong>MCP 사용 제한</strong> — 오픈소스와 동일 기준 적용</li>
-      <li><strong>공식 AI 서비스 선택</strong> — ChatGPT, Claude, Gemini 등</li>
-      <li><strong>피해 범위 격리</strong> — 홈 디렉토리 작업 ✕, 최소 권한 IAM 사용</li>
-      <li><strong>신규 기능 사전 검토</strong> — 업데이트 내용 파악 후 사용</li>
-      <li><strong>AI 제안 명령어 직접 검증</strong> — 명령과 옵션 이해 후 실행</li>
-    </ol>
-  </div>
 
-  <!-- Slide 8: 결론 -->
+  <!-- Slide 8: 공격 유형 -->
   <div class="slide">
     <div class="slide-label">Part 1 — 6</div>
-    <h2>결론</h2>
-    <ul style="margin-bottom:24px;">
-      <li>Claude Code ≈ Cursor (OpenClaw와는 다른 선상)</li>
-      <li>"특정 서비스 금지"보다 <strong>"신규 AI 서비스 사용 전 검토"</strong> 규칙 수립이 효과적</li>
-    </ul>
-    <h3>권장 방향</h3>
-    <ul>
-      <li>AI 에이전트 사용 <strong>허용</strong></li>
-      <li>AWS IAM 등 계정 권한 제한</li>
-      <li>오픈소스 사용 전 검토 프로세스</li>
-      <li>비즈니스 플랜으로 <strong>관리자 모니터링 환경 구성</strong></li>
-    </ul>
-  </div>
-
-  <!-- Slide 9: 공격 유형 -->
-  <div class="slide">
-    <div class="slide-label">Part 1 — 7</div>
     <h2>AI 대상 공격 유형</h2>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:8px;">
       <div>
@@ -795,6 +841,39 @@
         <p style="margin-top:12px; font-size:14px; color:#6b7280;">→ 외부 콘텐츠 AI 입력 주의, 오픈소스 사용 전 검토</p>
       </div>
     </div>
+  </div>
+
+  <!-- Slide 9: 안전하게 쓰는 방법 -->
+  <div class="slide">
+    <div class="slide-label">Part 1 — 7</div>
+    <h2>안전하게 쓰는 방법</h2>
+    <ol style="gap:14px;">
+      <li><strong>오픈소스 사용 제한</strong> — 신뢰도 높은 오픈소스만, 사전 검증 후 사용</li>
+      <li><strong>MCP 사용 제한</strong> — 오픈소스와 동일 기준 적용</li>
+      <li><strong>공식 AI 서비스 선택</strong> — ChatGPT, Claude, Gemini 등</li>
+      <li><strong>피해 범위 격리</strong> — 홈 디렉토리 작업 ✕, 최소 권한 IAM 사용</li>
+      <li><strong>신규 기능 사전 검토</strong> — 업데이트 내용 파악 후 사용</li>
+      <li><strong>AI 제안 명령어 직접 검증</strong> — 명령과 옵션 이해 후 실행</li>
+    </ol>
+  </div>
+
+  <!-- Slide 10: 결론 -->
+  <div class="slide">
+    <div class="slide-label">Part 1 — 8</div>
+    <h2>결론</h2>
+    <ul style="margin-bottom:24px;">
+      <li>Claude Code ≈ Cursor (OpenClaw와는 다른 선상)</li>
+      <li>"특정 서비스 금지"보다 <strong>"신규 AI 서비스 사용 전 검토"</strong> 규칙 수립이 효과적</li>
+    </ul>
+    <h3>권장 방향</h3>
+    <ul>
+      <li>AI 에이전트 사용 <strong>허용</strong></li>
+      <li>AWS IAM 등 계정 권한 제한</li>
+      <li>오픈소스 사용 전 검토 프로세스</li>
+      <li>비즈니스 플랜으로 <strong>관리자 모니터링 환경 구성</strong></li>
+    </ul>
+    <h3>더 궁금하다면?</h3>
+    <p><a href="https://hankookilbo.atlassian.net/wiki/spaces/2/pages/7042138116/AI+Agent" target="_blank" style="color:#818cf8; text-decoration:underline; word-break:break-all;">hankookilbo.atlassian.net/wiki/spaces/2/pages/7042138116/AI+Agent</a></p>
   </div>
 
   <!-- Slide 10: Part 2 섹션 -->
