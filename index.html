@@ -43,17 +43,90 @@
     }
 
     @media (max-width: 768px) {
+      body { overflow-x: hidden; }
+
       .slide {
-        padding: 72px 28px 80px;
+        padding: 52px 16px 64px;
         justify-content: flex-start;
       }
       .slide-top {
-        padding-top: 72px;
+        padding-top: 52px;
+      }
+
+      .slide-label {
+        font-size: 11px;
+        margin-bottom: 10px;
+      }
+
+      .slide h1 {
+        font-size: 28px;
+        margin-bottom: 8px;
+      }
+
+      .slide h2 {
+        font-size: 22px;
+        margin-bottom: 16px;
+      }
+
+      .slide h3 {
+        font-size: 16px;
+        margin: 12px 0 6px;
+      }
+
+      .slide p, .slide li {
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .slide ul, .slide ol {
+        gap: 5px;
+      }
+
+      .slide blockquote {
+        font-size: 12px;
+        padding: 8px 12px;
+        margin: 8px 0;
+      }
+
+      .slide code {
+        font-size: 11px;
+      }
+
+      .slide.title-slide h1 { font-size: 32px; }
+      .slide.title-slide h3 { font-size: 15px; }
+      .slide.section-slide h1 { font-size: 24px; }
+      .slide.section-slide p { font-size: 12px; }
+
+      .toc-part-label,
+      .tag,
+      .slide-counter {
+        font-size: 11px;
+      }
+
+      .toc-item { font-size: 13px; }
+
+      .slide table {
+        font-size: 11px;
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .slide th, .slide td {
+        padding: 6px 8px;
+      }
+
+      #qr-slide { font-size: 13px !important; }
+      #qr-slide * { max-width: 100%; word-break: break-all; }
+
+      .qa-popup {
+        width: calc(100vw - 32px);
+        max-height: 70vh;
       }
     }
 
     .slide-label {
-      font-size: 12px;
+      font-size: 15px;
       text-transform: uppercase;
       letter-spacing: 2px;
       color: #6b7280;
@@ -61,7 +134,7 @@
     }
 
     .slide h1 {
-      font-size: 48px;
+      font-size: 52px;
       font-weight: 700;
       line-height: 1.2;
       margin-bottom: 12px;
@@ -69,14 +142,14 @@
     }
 
     .slide h2 {
-      font-size: 32px;
+      font-size: 38px;
       font-weight: 600;
       margin-bottom: 32px;
       color: #fff;
     }
 
     .slide h3 {
-      font-size: 20px;
+      font-size: 25px;
       font-weight: 600;
       margin: 20px 0 10px;
       color: #a5b4fc;
@@ -152,12 +225,12 @@
     @media (max-width: 768px) {
       .toc-grid {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 14px;
       }
     }
 
     .toc-part-label {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -229,7 +302,7 @@
       border: 1px solid rgba(99,102,241,0.3);
       border-radius: 6px;
       padding: 3px 10px;
-      font-size: 13px;
+      font-size: 15px;
       margin: 3px 3px 3px 0;
     }
 
@@ -264,7 +337,7 @@
     .nav-btn:disabled { opacity: 0.3; cursor: default; }
 
     .slide-counter {
-      font-size: 13px;
+      font-size: 15px;
       color: #6b7280;
       min-width: 60px;
       text-align: center;
@@ -531,7 +604,7 @@
   <!-- Slide 0: QR코드 -->
   <div class="slide active" id="qr-slide" style="align-items:center; justify-content:center; text-align:center;">
     <div style="display:flex; flex-direction:column; align-items:center; gap:28px;">
-      <div style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:#6366f1;">이 기기에서 발표 자료 보기</div>
+      <div style="font-size:15px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:#6366f1;">이 기기에서 발표 자료 보기</div>
       <div id="qrcode" style="background:#fff; padding:16px; border-radius:16px; display:inline-block;"></div>
       <div style="font-size:18px; color:#a5b4fc; font-family:monospace;">yujung7768903.github.io/ai-agent-seminar</div>
       <div style="font-size:14px; color:#6b7280;">발표 자료를 직접 확인하세요</div>
@@ -544,7 +617,7 @@
     <h2>발표 순서</h2>
     <div class="toc-grid">
       <div>
-        <div style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#6366f1; margin-bottom:14px;">Part 1. AI 에이전트, 써도 될까?</div>
+        <div style="font-size:15px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#6366f1; margin-bottom:14px;">Part 1. AI 에이전트, 써도 될까?</div>
         <div class="toc-item"><span class="num">1</span> 핵심 개념 정리</div>
         <div class="toc-item"><span class="num">2</span> AI 서비스 비교</div>
         <div class="toc-item"><span class="num">3</span> OpenClaw, 왜 문제인가?</div>
@@ -554,7 +627,7 @@
         <div class="toc-item"><span class="num">7</span> AI 대상 공격 유형</div>
       </div>
       <div>
-        <div style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#6366f1; margin-bottom:14px;">Part 2. AI, 저는 이렇게 씁니다</div>
+        <div style="font-size:15px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#6366f1; margin-bottom:14px;">Part 2. AI, 저는 이렇게 씁니다</div>
         <div class="toc-item"><span class="num">8</span> Claude Code 커스텀 명령어</div>
         <div class="toc-item"><span class="num">9</span> 디스코드 복습 퀴즈봇</div>
       </div>
